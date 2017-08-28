@@ -1,0 +1,39 @@
+{
+  "name": "grunt-html-split",
+  "description": "splits html files on a handle and outputs htmls surrounded by handels",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mas99001/grunt-html-split",
+  "author": {
+    "name": "Aditya Kumar",
+    "email": "aditya.podia@gmail.com",
+    "url": "https://github.com/mas99001"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mas99001/grunt-html-split.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mas99001/grunt-html-split/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/mas99001/grunt-html-split/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
