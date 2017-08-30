@@ -62,6 +62,15 @@ Type: `String`
 Default value: `'*.html'`
 
 A string value that is used to store filter for the files.
+```js
+'*.*'
+'*.html'
+'*.js'
+'**'
+'**/*'
+'**/*.html'
+'**/*.js'
+```
 
 #### options.dest
 Type: `String`

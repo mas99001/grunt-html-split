@@ -21,6 +21,18 @@ module.exports = function(grunt) {
         dest: "dist/",
         handler: "<!--DS22SD-->"
     });
+    console.log('\x1b[45m%s\x1b[0m', 'dest:= ' + options.dest);
+    console.log('\x1b[45m%s\x1b[0m', 'src:= ' + options.src);
+    var lastChar = options.dest.substr(-1);
+    if (lastChar != '/') {
+        options.dest = options.dest + '/';
+    }
+    lastChar = options.src.substr(-1);
+    if (lastChar == '/') {
+        options.src = options.src.slice(0, -1);
+    }
+    console.log('\x1b[45m%s\x1b[0m', 'dest:= ' + options.dest);
+    console.log('\x1b[45m%s\x1b[0m', 'src:= ' + options.src);
     var wc = ".";
     var filelist = [];
 
@@ -58,6 +70,16 @@ module.exports = function(grunt) {
     var isOdd = function(n) {
         return isEven(Number(n) + 1);
     }
+    var lCreateDirs = function(path){
+        var pathArray = path.split('/');
+        var pEle = '';
+        pathArray.forEach(function(ele){
+            pEle += ele + '/';
+            console.log('\x1b[45m%s\x1b[0m', pEle);
+            if(!fs.existsSync(pEle))
+                fs.mkdirSync(pEle);
+        });
+    }
 
     var applyHandler = function() {
         console.log('\x1b[32m%s\x1b[0m', "Begining applyHandler");
@@ -68,7 +90,7 @@ module.exports = function(grunt) {
             var sourceHtml = fs.readFileSync(element, 'utf8');
             var sourceHtmlgArray = sourceHtml.split(options.handler);
             if(!fs.existsSync(options.dest))
-              fs.mkdirSync(options.dest);
+                lCreateDirs(options.dest.slice(0, -1));
             var index = 0;
             var splitIndex = 0;
             sourceHtmlgArray.forEach(function(ele){
