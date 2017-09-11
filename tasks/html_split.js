@@ -21,6 +21,8 @@ module.exports = function(grunt) {
         dest: "dist/",
         handler: "<!--DS22SD-->"
     });
+    var wc = ".";
+    var filelist = [];
     console.log('\x1b[45m%s\x1b[0m', 'dest:= ' + options.dest);
     console.log('\x1b[45m%s\x1b[0m', 'src:= ' + options.src);
     var lastChar = options.dest.substr(-1);
@@ -31,10 +33,17 @@ module.exports = function(grunt) {
     if (lastChar == '/') {
         options.src = options.src.slice(0, -1);
     }
+    var target = grunt.option('target') || "";
+    if(target !== ""){
+        var targetArray = grunt.option('target').split(',');
+        console.log('\x1b[45m%s\x1b[0m', 'target:= ' + targetArray);
+        options.wildcard = 'target';
+        targetArray.forEach(function(file) {
+            filelist.push(options.src+'/'+file);
+        });
+    }
     console.log('\x1b[45m%s\x1b[0m', 'dest:= ' + options.dest);
     console.log('\x1b[45m%s\x1b[0m', 'src:= ' + options.src);
-    var wc = ".";
-    var filelist = [];
 
     var walk = function(dir) {
         console.log("Begining WALK with : " + dir);
@@ -113,7 +122,7 @@ module.exports = function(grunt) {
         case '**/*':      wc = ".";     walkRecursive(options.src); break;
         case '**/*.html': wc = ".html"; walkRecursive(options.src); break;
         case '**/*.js':   wc = ".js";   walkRecursive(options.src); break;
-        default:          wc = ".";     walk(options.src);
+        default:          wc = ".";
     }
     console.log('\x1b[36m%s', 'Following are the files: '); 
     console.log(filelist);

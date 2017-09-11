@@ -129,6 +129,17 @@ Multiple partials are named with originial appended with incremental index `1, 2
       })
 ```
 
+#### Usage
+1. will process all files under src as per the wildcard
+2. will process `src\buttons-patterns.html`
+3. will process `src\buttons-patterns.html` and `src\cc-patterns.html`
+
+```js
+grunt
+grunt --target=buttons-patterns.html
+grunt --target=buttons-patterns.html,cc-patterns.html
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
