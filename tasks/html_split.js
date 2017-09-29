@@ -19,7 +19,8 @@ module.exports = function(grunt) {
         src: "src/",
         wildcard: "*.html",
         dest: "dist/",
-        handler: "<!--DS22SD-->"
+        handler: "<!--DS22SD-->",
+        filenameSuffixHandler: "<html-split-title>"
     });
     var wc = ".";
     var filelist = [];
@@ -105,9 +106,19 @@ module.exports = function(grunt) {
             sourceHtmlgArray.forEach(function(ele){
                 if(isOdd(index)){
                   splitIndex += 1;
+                  var filenameSuffix = sourceHtmlgArray[index].split(options.filenameSuffixHandler)[1];
+                  if(filenameSuffix) {
+                    filenameSuffix = "_" + filenameSuffix
+                                        .trim()
+                                        .replace(/\s+/g, "-")
+                                        .toLowerCase();
+                  } else {
+                    filenameSuffix = "";
+                  }
                   console.log("Index: " + index);
                   console.log("splitIndex: " + splitIndex);
-                  fs.writeFileSync(options.dest+filename.replace(".html", "_" + splitIndex + ".html"), sourceHtmlgArray[index], 'utf-8');
+                  console.log("filenameSuffix: " + filenameSuffix);
+                  fs.writeFileSync(options.dest+filename.replace(".html", "_" + splitIndex + filenameSuffix + ".html"), sourceHtmlgArray[index], 'utf-8');
                 }
                 index += 1;
             })
