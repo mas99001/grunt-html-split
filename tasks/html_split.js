@@ -95,9 +95,7 @@ module.exports = function(grunt) {
     var applyHandler = function() {
         console.log('\x1b[32m%s\x1b[0m', "Begining applyHandler");
         filelist.forEach(function(element) {
-          console.log('\x1b[36m%s\x1b[0m', element);
           var filename = element.replace(/^.*[\\\/]/, '')
-          console.log(filename);
             var sourceHtml = fs.readFileSync(element, 'utf8');
             var sourceHtmlgArray = sourceHtml.split(options.handler);
             if(!fs.existsSync(options.dest))
@@ -122,10 +120,14 @@ module.exports = function(grunt) {
                   } else {
                     filenameSuffix = "";
                   }
+                  console.log('\x1b[31m%s\x1b[0m', filename);
+                  var pattrn_name = filename.replace(".html", "").replace("patterns-", "");
+                  pattrn_name = options.dest + pattrn_name + "/";
+                  lCreateDirs(pattrn_name);
                   console.log("Index: " + index);
                   console.log("splitIndex: " + splitIndex);
                   console.log("filenameSuffix: " + filenameSuffix);
-                  fs.writeFileSync(options.dest+filename.replace(".html", "_" + splitIndex + filenameSuffix + ".html"), sourceHtmlgArray[index], 'utf-8');
+                  fs.writeFileSync(pattrn_name + splitIndex + filenameSuffix + ".html", sourceHtmlgArray[index], 'utf-8');
                 }
                 index += 1;
             })
