@@ -20,7 +20,8 @@ module.exports = function(grunt) {
         wildcard: "*.html",
         dest: "dist/",
         handler: "<!--DS22SD-->",
-        filenameSuffixHandler: "<html-split-title>"
+        filenameSuffixPreHandler: "<html-split-title>",
+        filenameSuffixPostHandler: "</html-split-title>"
     });
     var wc = ".";
     var filelist = [];
@@ -105,9 +106,15 @@ module.exports = function(grunt) {
             var splitIndex = 0;
             sourceHtmlgArray.forEach(function(ele){
                 if(isOdd(index)){
-                  splitIndex += 1;
-                  var filenameSuffix = sourceHtmlgArray[index].split(options.filenameSuffixHandler)[1];
-                  if(filenameSuffix) {
+                splitIndex += 1;
+                var filenameSuffix;
+                var filenameSuffixArray = sourceHtmlgArray[index].split(options.filenameSuffixPreHandler);
+                if (filenameSuffixArray.length >= 3 && filenameSuffixArray[1].indexOf(options.filenameSuffixPostHandler) === -1) {
+                    filenameSuffix = filenameSuffixArray[1];
+                } else if (filenameSuffixArray.length === 2 || (filenameSuffixArray.length >= 3 && filenameSuffixArray[1].indexOf(options.filenameSuffixPostHandler) > -1)) {
+                    filenameSuffix = filenameSuffixArray[1].split(options.filenameSuffixPostHandler)[0];
+                }
+                if(filenameSuffix) {
                     filenameSuffix = "_" + filenameSuffix
                                         .trim()
                                         .replace(/\s+/g, "-")

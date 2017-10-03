@@ -30,7 +30,8 @@ In your project's Gruntfile, add a section named `html_split` to the data object
             wildcard: "**/*.html",
             dest: "dist/",
             handler: "<!--DS22SD-->",
-            filenameSuffixHandler: "<html-split-title>"
+            filenameSuffixPreHandler: "<html-split-title>",
+            filenameSuffixPostHandler: "</html-split-title>"
           },
           files: {
             'dest/default_options': ['src/srcfile', 'src/123'],
@@ -122,7 +123,8 @@ Multiple partials are named with originial appended with incremental index `1, 2
             dest: "destination/",
             wildcard: "**/*",
             handler: "<!--DS22SD-->",
-            filenameSuffixHandler: "<html-split-title>"
+            filenameSuffixPreHandler: "<html-split-title>",
+            filenameSuffixPostHandler: "</html-split-title>"
           },
           files: {
             'dest/default_options': ['src/srcfile', 'src/123'],
