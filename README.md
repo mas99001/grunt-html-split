@@ -44,7 +44,7 @@ In your project's Gruntfile, add a section named `html_split` to the data object
 ```js
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-html-split": "^0.1.0"
+    "grunt-html-split": "^1.3.1"
   },
   "engines": {
     "node": ">=0.8.0"
