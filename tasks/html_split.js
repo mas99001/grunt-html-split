@@ -123,7 +123,8 @@ module.exports = function(grunt) {
                   console.log('\x1b[31m%s\x1b[0m', filename);
                   var pattrn_name = filename.replace(".html", "").replace("patterns-", "");
                   pattrn_name = options.dest + pattrn_name + "/";
-                  lCreateDirs(pattrn_name);
+                  lCreateDirs(pattrn_name.slice(0, -1));
+                  console.log('\x1b[31m%s\x1b[0m', pattrn_name + splitIndex + filenameSuffix + ".html");
                   console.log("Index: " + index);
                   console.log("splitIndex: " + splitIndex);
                   console.log("filenameSuffix: " + filenameSuffix);
